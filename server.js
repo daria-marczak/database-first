@@ -44,6 +44,11 @@ kenny.manify(function(err, name) {
   console.log("Your name is: " + name);
 })
 
+kenny.save(function(err) {
+  if (err) throw err;
+  console.log("User " + kenny.name + " has been saved");
+});
+
 const benny = new User({
   name: "Benny",
   username: "Benny_the_boy",
@@ -55,44 +60,42 @@ benny.manify(function(err, name) {
   console.log("Your name is " + name);
 });
 
+const mark = new User({
+  name: "Mark",
+  username: "Mark_the_Boy",
+  password: "password"
+});
 
+mark.manify(function(err, name) {
+  if (err) throw err;
+  console.log("Your name is " + name);
+});
 
-// const mark = new User({
-//   name: "Mark",
-//   username: "Mark_the_Boy",
-//   password: "password"
-// });
+mark.save(function(err) {
+  if (err) throw err;
+  console.log("User " + mark.name + " has been saved");
+});
 
-// mark.manify(function(err, name) {
-//   if (err) throw err;
-//   console.log("Your name is " + name);
-// });
+const george = new User({
+  name: "Georges",
+  username: "George_the_Boy",
+  password: "password"
+});
 
-// // mark.save(function(err) {
-// //   if (err) throw err;
-// //   console.log("User " + mark.name + " has been saved");
-// // });
+george.manify(function(err, name) {
+  if (err) throw err;
+  console.log("Your name is " + name);
+});
 
-// const george = new User({
-//   name: "Georges",
-//   username: "George_the_Boy",
-//   password: "password"
-// });
+george.save(function(err) {
+  if (err) throw err;
+  console.log("User " + george.name + " has been saved");
+});
 
-// george.manify(function(err, name) {
-//   if (err) throw err;
-//   console.log("Your name is " + name);
-// });
-
-// george.save(function(err) {
-//   if (err) throw err;
-//   console.log("User " + george.name + " has been saved");
-// });
-
-// User.find({}, function(err, res) {
-//   if (err) throw err;
-//   console.log("Actual database records are " + res);
-// });
+User.find({}, function(err, res) {
+  if (err) throw err;
+  console.log("Actual database records are " + res);
+});
 
 const query = User.find({});
 const promise = query.exec();
@@ -103,10 +106,10 @@ promise.catch(function(reason) {
   console.log("Something went wrong: " + reason);
 });
 
-// User.find({username: "Kenny_the_boy"}).exec(function(err, res) {
-//   if (err) throw err;
-//   console.log("Record you are looking for is " + res);
-// });
+User.find({username: "Kenny_the_boy"}).exec(function(err, res) {
+  if (err) throw err;
+  console.log("Record you are looking for is " + res);
+});
 
 // const query = User.find({username: "Kenny_the_boy"});
 // const promise = query.exec();
@@ -114,7 +117,7 @@ promise.catch(function(reason) {
 User.find({username: "Kenny_the_boy"}, function(err, user) {
   if (err) throw err;
   console.log("Old password is " + user[0].password);
-  user[0].password = "newPassword";
+  user[0].password = "newestPassword";
   console.log("New password is " + user[0].password);
 
   user[0].save(function(err) {
@@ -136,7 +139,9 @@ User.find({username: "Mark_the_Boy"}, function(err, user) {
   });
 });
 
-User.findOneAndRemove({username: "George_the_boy"}, function(err) {
-  if (err) throw err;
-  console.log("User deleted!");
-});
+// User.findOneAndRemove({username: "Kenny_the_boy"}, function(err) {
+//   if (err) throw err;
+//   console.log("User deleted!");
+// });
+
+Promise.all([kenny.save(), mark.save(), george.save(), benny.save()]);
