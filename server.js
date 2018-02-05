@@ -6,7 +6,7 @@ mongoose.connect("mongodb://admin:admin@ds223578.mlab.com:23578/database-1");
 
 const userSchema = new Schema({
   name: String,
-  username: {type: String, required: true, unique: true},
+  username: {type: String, required: true},
   password: {type: String, required: true},
   admin: Boolean,
   created_at: Date,
